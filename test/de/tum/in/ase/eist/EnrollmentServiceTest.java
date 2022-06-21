@@ -11,12 +11,21 @@ import org.junit.jupiter.api.extension.ExtendWith;
 class EnrollmentServiceTest {
 
 	// TODO 1: setup EnrollmentServiceTest with all necessary attributes
+   private EnrollmentService  enrollmentService = new EnrollmentService();
 
+   @Mock
+   private Course courseMock;
 	@Test
 	void testEnrollStudentSuccessful() {
 
 		// TODO 2: implement the test
-		fail("not implemented yet");
+		Student student = new Student();
+		int expectedSize = student.getCourses().size() + 1;
+		expect(courseMock.enroll(student)).andReturn(true);
+
+		replay(courseMock);
+		enrollmentService.enroll(student, courseMock);
+		assertEquals(expectedSize, student.getCourses().size());
 	}
 
 	@Test
