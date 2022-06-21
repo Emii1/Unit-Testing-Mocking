@@ -34,6 +34,12 @@ class EnrollmentServiceTest {
     void testEnrollStudentFailure() {
 
         // TODO 3: Implement the test (optional)
+        Student student = new Student();
+        int expectedSize = student.getCourses().size() + 1;
+        expect(courseMock.enroll(student)).andReturn(false);
+        replay(courseMock);
+        enrollmentService.enroll(student, courseMock);
+        assertEquals(expectedSize, student.getCourses().size());
     }
 
 }
